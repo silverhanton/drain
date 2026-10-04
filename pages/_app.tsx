@@ -60,7 +60,7 @@ const connectors = connectorsForWallets(
     },
   ],
   {
-    appName: 'Drain',
+    appName: 'lupa',
     projectId: walletConnectProjectId,
   },
 );
