@@ -6,12 +6,20 @@ import type { NextPage } from 'next';
 import '../styles/globals.css';
 
 // Imports
-import { WagmiProvider } from 'wagmi';
+import { WagmiProvider, createConfig } from 'wagmi';
 import {
-  getDefaultConfig,
+  connectorsForWallets,
   RainbowKitProvider,
   darkTheme,
 } from '@rainbow-me/rainbowkit';
+import {
+  metaMaskWallet,
+  trustWallet,
+  rainbowWallet,
+  coinbaseWallet,
+  safepalWallet,
+  walletConnectWallet,
+} from '@rainbow-me/rainbowkit/wallets';
 import '@rainbow-me/rainbowkit/styles.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
@@ -34,9 +42,31 @@ const walletConnectProjectId = z
   .string()
   .parse(process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID);
 
-const wagmiConfig = getDefaultConfig({
-  appName: 'Drain',
-  projectId: walletConnectProjectId,
+const connectors = connectorsForWallets(
+  [
+    {
+      groupName: 'Popular',
+      wallets: [
+        metaMaskWallet,
+        trustWallet,
+        rainbowWallet,
+        coinbaseWallet,
+        safepalWallet,
+      ],
+    },
+    {
+      groupName: 'Other wallets',
+      wallets: [walletConnectWallet],
+    },
+  ],
+  {
+    appName: 'Drain',
+    projectId: walletConnectProjectId,
+  },
+);
+
+const wagmiConfig = createConfig({
+  connectors,
   chains: [
     mainnet,
     polygon,
