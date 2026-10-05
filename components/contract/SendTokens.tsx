@@ -234,18 +234,7 @@ export const SendTokens = () => {
         <label className="field__label" htmlFor="drain-destination">
           Draining to
         </label>
-        <input
-          id="drain-destination"
-          className="address-input"
-          required
-          value={destinationAddress}
-          placeholder="vitalik.eth"
-          onChange={(e) => setDestinationAddress(e.target.value)}
-          data-state={addressState}
-          spellCheck={false}
-          autoCapitalize="off"
-          autoCorrect="off"
-        />
+        
       </div>
 
       <div className="drain-summary">
