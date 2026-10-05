@@ -56,7 +56,7 @@ export default function Home() {
         lupa group ·{' '}
         <Link href="/compromised-wallet-rescue/">2026</Link> ·{' '}
         <a
-          href="https://github.com/dawsbot/drain"
+          href="blank"
           target="_blank"
           rel="noreferrer"
         >
